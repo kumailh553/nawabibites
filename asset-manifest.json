@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/nawabibites/static/css/main.96fa7333.css",
-    "main.js": "/nawabibites/static/js/main.532b13ac.js",
+    "main.css": "/nawabibites/static/css/main.b30c1312.css",
+    "main.js": "/nawabibites/static/js/main.6e0a1c41.js",
     "index.html": "/nawabibites/index.html",
-    "main.96fa7333.css.map": "/nawabibites/static/css/main.96fa7333.css.map",
-    "main.532b13ac.js.map": "/nawabibites/static/js/main.532b13ac.js.map"
+    "main.b30c1312.css.map": "/nawabibites/static/css/main.b30c1312.css.map",
+    "main.6e0a1c41.js.map": "/nawabibites/static/js/main.6e0a1c41.js.map"
   },
   "entrypoints": [
-    "static/css/main.96fa7333.css",
-    "static/js/main.532b13ac.js"
+    "static/css/main.b30c1312.css",
+    "static/js/main.6e0a1c41.js"
   ]
 }
