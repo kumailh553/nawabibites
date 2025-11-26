@@ -1,21 +1,21 @@
 const products = [
   {
     id: 1,
-    name: "Red T-Shirt",
-    price: 499,
-    image: "https://via.placeholder.com/200"
+    name: "Zeera Mathri",
+    price: 199,
+    image: "https://remote-fuchsia-qed6xhtpvh.edgeone.app/2_69cba0a6-d1bc-46ea-b316-feceda4332fd_900x.jpg"
   },
   {
     id: 2,
-    name: "Blue Jeans",
-    price: 999,
-    image: "https://via.placeholder.com/200"
+    name: "Methi Mathri",
+    price: 199,
+    image: "https://remote-fuchsia-qed6xhtpvh.edgeone.app/2_69cba0a6-d1bc-46ea-b316-feceda4332fd_900x.jpg"
   },
   {
     id: 3,
-    name: "Sports Shoes",
-    price: 1499,
-    image: "https://via.placeholder.com/200"
+    name: "Plane Mathri",
+    price: 199,
+    image: "https://remote-fuchsia-qed6xhtpvh.edgeone.app/2_69cba0a6-d1bc-46ea-b316-feceda4332fd_900x.jpg"
   }
 ];
 

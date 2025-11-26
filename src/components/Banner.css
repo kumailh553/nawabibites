@@ -1,0 +1,196 @@
+/* WRAPPER */
+.banner-wrapper {
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* ---------------- HERO SLIDER ---------------- */
+.hero-slider {
+  width: 100%;
+  height: 300px;
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+}
+
+.slide {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  animation: fade 12s infinite;
+  opacity: 0;
+}
+
+.slide1 {
+  animation-delay: 0s;
+}
+
+.slide2 {
+  animation-delay: 4s;
+}
+
+.slide3 {
+  animation-delay: 8s;
+}
+
+@keyframes fade {
+  0% { opacity: 1; }
+  33% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* ---------------- GRID BANNERS ---------------- */
+.grid-banners {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 15px;
+}
+
+.grid-card {
+  height: 180px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+.grid-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------------- OFFER BANNER ---------------- */
+.offer-banner {
+  margin-top: 25px;
+  height: 220px;
+  background-image: url("https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1200");
+  background-size: cover;
+  background-position: center;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 30px;
+  color: white;
+  text-shadow: 0px 2px 8px rgba(0,0,0,0.6);
+}
+
+.offer-banner h2 {
+  font-size: 34px;
+  margin: 0;
+  font-weight: 700;
+}
+
+.offer-banner p {
+  font-size: 18px;
+  margin: 6px 0;
+}
+
+.offer-banner button {
+  width: 150px;
+  padding: 10px 16px;
+  font-size: 16px;
+  background: #ff3d3d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: 0.2s;
+}
+
+.offer-banner button:hover {
+  background: #e60000;
+}
+
+/* ---------------- MOBILE RESPONSIVE ---------------- */
+@media (max-width: 600px) {
+
+  .hero-slider {
+    height: 180px;
+  }
+
+  .grid-card {
+    height: 140px;
+  }
+
+  .offer-banner {
+    height: 180px;
+    padding-left: 15px;
+  }
+
+  .offer-banner h2 {
+    font-size: 22px;
+  }
+
+  .offer-banner p {
+    font-size: 15px;
+  }
+
+  .offer-banner button {
+    width: 120px;
+    padding: 8px;
+    font-size: 14px;
+  }
+}
+
+
+
+
+
+
+/* -------------------- MOBILE RESPONSIVE -------------------- */
+@media (max-width: 600px) {
+
+  /* HERO SLIDER HEIGHT SMALLER */
+  .hero-slider {
+    height: 160px;
+    border-radius: 10px;
+  }
+
+  .slide {
+    object-fit: cover;
+  }
+
+  /* GRID BANNERS SMALLER */
+  .grid-banners {
+    grid-template-columns: 1fr; /* 1 banner per row */
+    gap: 12px;
+  }
+
+ /* 3 GRID BANNERS — MOBILE ME 3 COLUMNS */
+  .grid-banners {
+    grid-template-columns: repeat(3, 1fr); /* 3 grids in 1 row */
+    gap: 8px;
+  }
+
+  .grid-card img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* OFFER BANNER SMALLER */
+  .offer-banner {
+    height: 160px;
+    padding-left: 15px;
+    border-radius: 10px;
+  }
+
+  .offer-banner h2 {
+    font-size: 20px;
+  }
+
+  .offer-banner p {
+    font-size: 14px;
+  }
+
+  .offer-banner button {
+    width: 120px;
+    padding: 8px;
+    font-size: 14px;
+  }
+}

@@ -1,19 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 
+// Search Context import
+import { SearchContext } from "../context/SearchContext";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  // Search context se function lo
+  const { setSearchTerm } = useContext(SearchContext);
 
   return (
     <header className="header">
       <div className="nav-container">
 
         {/* Logo */}
-        <Link to="/" className="logo">MyStore</Link>
+        <Link to="/" className="logo">Nawabi Bites</Link>
 
-        {/* Hamburger Button (Mobile Only) */}
+        {/* Hamburger (Mobile) */}
         <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
           ☰
         </button>
@@ -27,9 +32,13 @@ export default function Header() {
           <Link to="/login">Login</Link>
         </nav>
 
-        {/* Search Box */}
+        {/* Search Box (working) */}
         <div className="search-box">
-          <input type="text" placeholder="Search products..." />
+          <input
+            type="text"
+            placeholder="Search products..."
+            onChange={(e) => setSearchTerm(e.target.value.toLowerCase())}
+          />
         </div>
 
         {/* Icons */}
@@ -37,6 +46,7 @@ export default function Header() {
           <Link to="/login">👤</Link>
           <Link to="/cart">🛒</Link>
         </div>
+
       </div>
     </header>
   );
