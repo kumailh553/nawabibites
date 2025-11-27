@@ -9,6 +9,8 @@ import Cart from "./components/Cart";
 import Footer from "./components/Footer";
 import Login from "./pages/Login";
 
+import WhatsAppButton from "./components/WhatsAppButton";   // ✅ IMPORT ADDED
+
 import { CartProvider } from "./context/CartContext";
 import { SearchProvider } from "./context/SearchContext";
 
@@ -33,6 +35,8 @@ function Wrapper() {
       </div>
 
       <Footer />
+
+      <WhatsAppButton />   {/* ✅ FLOATING WHATSAPP BUTTON */}
     </>
   );
 }
