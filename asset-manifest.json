@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/nawabibites/static/css/main.d1c6b435.css",
-    "main.js": "/nawabibites/static/js/main.43f758c4.js",
+    "main.css": "/nawabibites/static/css/main.45772807.css",
+    "main.js": "/nawabibites/static/js/main.c24b97d7.js",
     "static/media/logo.png": "/nawabibites/static/media/logo.9c859f1100c677182882.png",
     "static/media/add-to-cart.mp3": "/nawabibites/static/media/add-to-cart.e0957f31b4aca6ca0b66.mp3",
     "index.html": "/nawabibites/index.html",
-    "main.d1c6b435.css.map": "/nawabibites/static/css/main.d1c6b435.css.map",
-    "main.43f758c4.js.map": "/nawabibites/static/js/main.43f758c4.js.map"
+    "main.45772807.css.map": "/nawabibites/static/css/main.45772807.css.map",
+    "main.c24b97d7.js.map": "/nawabibites/static/js/main.c24b97d7.js.map"
   },
   "entrypoints": [
-    "static/css/main.d1c6b435.css",
-    "static/js/main.43f758c4.js"
+    "static/css/main.45772807.css",
+    "static/js/main.c24b97d7.js"
   ]
 }
