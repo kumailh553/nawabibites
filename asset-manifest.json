@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/nawabibites/static/css/main.268b7d41.css",
-    "main.js": "/nawabibites/static/js/main.23bc3532.js",
-    "static/media/logo.png": "/nawabibites/static/media/logo.9c859f1100c677182882.png",
-    "static/media/add-to-cart.mp3": "/nawabibites/static/media/add-to-cart.e0957f31b4aca6ca0b66.mp3",
-    "index.html": "/nawabibites/index.html",
-    "main.268b7d41.css.map": "/nawabibites/static/css/main.268b7d41.css.map",
-    "main.23bc3532.js.map": "/nawabibites/static/js/main.23bc3532.js.map"
+    "main.css": "/static/css/main.c925a77d.css",
+    "main.js": "/static/js/main.f87e116d.js",
+    "static/media/logo.png": "/static/media/logo.9c859f1100c677182882.png",
+    "static/media/add-to-cart.mp3": "/static/media/add-to-cart.e0957f31b4aca6ca0b66.mp3",
+    "index.html": "/index.html",
+    "main.c925a77d.css.map": "/static/css/main.c925a77d.css.map",
+    "main.f87e116d.js.map": "/static/js/main.f87e116d.js.map"
   },
   "entrypoints": [
-    "static/css/main.268b7d41.css",
-    "static/js/main.23bc3532.js"
+    "static/css/main.c925a77d.css",
+    "static/js/main.f87e116d.js"
   ]
 }
