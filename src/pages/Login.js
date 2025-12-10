@@ -1,64 +1,62 @@
 import React, { useState } from "react";
+import "./Login.css";
 import { auth } from "../firebase";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
-
-const Login = () => {
+export default function SingleAuth() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
+  const [pass, setPass] = useState("");
 
-  // Signup Function
-  const handleSignup = async () => {
-    try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      setMessage("Signup successful!");
-    } catch (error) {
-      setMessage(error.message);
+  const navigate = useNavigate();
+
+  const handleAuth = async () => {
+    if (!email || !pass) {
+      alert("Please enter email & password");
+      return;
     }
-  };
 
-  // Login Function
-  const handleLogin = async () => {
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      setMessage("Login successful!");
-    } catch (error) {
-      setMessage(error.message);
+      // 🔹 Try Login First
+      await signInWithEmailAndPassword(auth, email, pass);
+      navigate("/checkout");
+    } catch (err) {
+      console.log("Login failed, creating account...");
+
+      try {
+        // 🔹 Auto Signup
+        await createUserWithEmailAndPassword(auth, email, pass);
+        alert("ACCOUNT CREATED SUCESSFULL✔");
+        navigate("/checkout");
+      } catch (error) {
+        alert(error.message);
+      }
     }
   };
 
   return (
-    <div style={{ padding: "20px", maxWidth: "300px", margin: "auto" }}>
-      <h2>Login / Signup</h2>
+    <div className="login-container">
+      <div className="login-box fade-in">
+        <h2>Welcome</h2>
+        <p>Just Signup/Login to check order and tracking details after placing an order</p>
 
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        style={{ width: "100%", marginBottom: "10px" }}
-      />
+        <input
+          type="email"
+          placeholder="Email"
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        style={{ width: "100%", marginBottom: "10px" }}
-      />
+        <input
+          type="password"
+          placeholder="Password"
+          onChange={(e) => setPass(e.target.value)}
+        />
 
-      <button onClick={handleSignup} style={{ width: "100%", marginBottom: "10px" }}>
-        Signup
-      </button>
-
-      <button onClick={handleLogin} style={{ width: "100%", marginBottom: "10px" }}>
-        Login
-      </button>
-
-      <p>{message}</p>
+        <button onClick={handleAuth}>Continue</button>
+      </div>
     </div>
   );
-};
-
-export default Login;
+}

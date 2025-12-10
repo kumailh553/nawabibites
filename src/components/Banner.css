@@ -7,7 +7,7 @@
 /* ---------------- HERO SLIDER ---------------- */
 .hero-slider {
   width: 100%;
-  height: 300px;
+  height: 550px;
   border-radius: 14px;
   overflow: hidden;
   position: relative;
@@ -19,21 +19,11 @@
   height: 100%;
   object-fit: cover;
   position: absolute;
-  animation: fade 12s infinite;
-  opacity: 0;
+ 
+
 }
 
-.slide1 {
-  animation-delay: 0s;
-}
 
-.slide2 {
-  animation-delay: 4s;
-}
-
-.slide3 {
-  animation-delay: 8s;
-}
 
 @keyframes fade {
   0% { opacity: 1; }
@@ -50,7 +40,10 @@
 }
 
 .grid-card {
-  height: 180px;
+  height: 400px;
+width: 400px;
+  
+
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
@@ -66,7 +59,7 @@
 .offer-banner {
   margin-top: 25px;
   height: 220px;
-  background-image: url("https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1200");
+  background-image: url("https://i.ibb.co/5b2xPg1/20251202-000835.jpg");
   background-size: cover;
   background-position: center;
   border-radius: 14px;
@@ -75,8 +68,9 @@
   flex-direction: column;
   justify-content: center;
   padding-left: 30px;
-  color: white;
-  text-shadow: 0px 2px 8px rgba(0,0,0,0.6);
+  color: black;
+text-shadow:	-3px 2px 9px #ffda06;
+  
 }
 
 .offer-banner h2 {
@@ -107,15 +101,31 @@
   background: #e60000;
 }
 
+.banner123{
+ 
+  padding: 15px 16px;
+  font-size: 30px;
+  color: black;
+  border: none;
+  border-radius: 8px;
+text-align:center;
+  margin-top: 8px;
+margin-bottom: -12px;
+font-family:'sans-sarif';
+  
+}
+
 /* ---------------- MOBILE RESPONSIVE ---------------- */
 @media (max-width: 600px) {
 
   .hero-slider {
-    height: 180px;
+    height: 190px;
+width: 380px;
   }
 
   .grid-card {
-    height: 140px;
+    height: 120px;
+width: 120px;
   }
 
   .offer-banner {
@@ -136,6 +146,22 @@
     padding: 8px;
     font-size: 14px;
   }
+
+.banner123{
+ 
+  padding: 1px 16px;
+  font-size: 15px;
+  color: black;
+  border: none;
+  border-radius: 8px;
+text-align:center;
+  margin-top: 8px;
+  margin-bottom: -12px;
+font-family:sans serif;
+}
+
+
+
 }
 
 
@@ -170,6 +196,8 @@
 
   .grid-card img {
     height: 100%;
+height: 100%;
+width: 100%;
     object-fit: cover;
   }
 

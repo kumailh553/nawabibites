@@ -1,7 +1,11 @@
 // Import Firebase functions
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import {
+  getAuth,
+  RecaptchaVerifier,
+  signInWithPhoneNumber
+} from "firebase/auth";
 import { getStorage } from "firebase/storage";
 
 // Your Firebase configuration
@@ -20,5 +24,8 @@ const app = initializeApp(firebaseConfig);
 
 // Export required Firebase services
 export const db = getFirestore(app);       // Database
-export const auth = getAuth(app);          // Authentication (Login/Signup)
+export const auth = getAuth(app);          // Authentication
 export const storage = getStorage(app);    // Image uploads
+
+// ⭐ MUST EXPORT FOR OTP LOGIN
+export { RecaptchaVerifier, signInWithPhoneNumber };

@@ -1,24 +1,68 @@
-import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext, useEffect, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
-
-// Search Context import
+import { CartContext } from "../context/CartContext";
 import { SearchContext } from "../context/SearchContext";
+import { auth } from "../firebase";
 
-export default function Header() {
+import logo from "../assets/logo.png";
+
+export default function Header({ cartIconRef }) {
   const [menuOpen, setMenuOpen] = useState(false);
-
-  // Search context se function lo
   const { setSearchTerm } = useContext(SearchContext);
+  const [userName, setUserName] = useState("");
+const [dropdownOpen, setDropdownOpen] = useState(false);
+
+
+const { cart } = useContext(CartContext); // ⭐ cart count
+
+  const navigate = useNavigate();
+const dropdownRef = useRef(null);
+
+  // 👤 Check Login
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        const emailName = user.email.split("@")[0];
+        setUserName(emailName);
+      } else {
+        setUserName("");
+      }
+    });
+  }, []);
+
+  // 🔥 Logout
+  const handleLogout = async () => {
+    await auth.signOut();
+    navigate("/login");
+  };
+
+
+ // Close dropdown if clicked outside
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+
+
+
 
   return (
     <header className="header">
       <div className="nav-container">
 
-        {/* Logo */}
-        <Link to="/" className="logo">Nawabi Bites</Link>
+        {/* LOGO */}
+        <Link to="/" className="logo">
+          <img src={logo} alt="Nawabi Bites" className="logo-img" />
+        </Link>
 
-        {/* Hamburger (Mobile) */}
+        {/* Hamburger */}
         <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
           ☰
         </button>
@@ -29,10 +73,9 @@ export default function Header() {
           <Link to="/category/womens">Womens</Link>
           <Link to="/category/kids">Kids</Link>
           <Link to="/category/electronics">Electronics</Link>
-          <Link to="/login">Login</Link>
         </nav>
 
-        {/* Search Box (working) */}
+        {/* Search Box */}
         <div className="search-box">
           <input
             type="text"
@@ -41,12 +84,51 @@ export default function Header() {
           />
         </div>
 
-        {/* Icons */}
-        <div className="icons">
-          <Link to="/login">👤</Link>
-          <Link to="/cart">🛒</Link>
-        </div>
+      {/* ICONS */}
+        <div className="icons" ref={dropdownRef}>
 
+          {/* 👤 Username + Dropdown */}
+          {userName ? (
+            <div className="profile-area">
+              <span
+                className="username"
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+              >
+                👤 {userName}
+              </span>
+
+              {/* DROPDOWN */}
+              {dropdownOpen && (
+                <div className="profile-dropdown">
+                  <Link to="/orders" onClick={() => setDropdownOpen(false)}>
+                    📦 My Orders
+                  </Link>
+                  <button className="logout-btn" onClick={handleLogout}>
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <Link to="/login" className="login-btn">👤</Link>
+          )}
+
+
+          {/* CART ICON */}
+
+  <div className="cart-wrapper">
+
+          <Link to="/cart" className="cart-icon" ref={cartIconRef}>
+            🛒
+          </Link>
+     {/* BADGE */}
+            {cart.length > 0 && (
+              <span className="cart-badge">{cart.length}</span>
+            )}
+          </div>
+
+
+        </div>
       </div>
     </header>
   );

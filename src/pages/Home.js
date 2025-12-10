@@ -1,25 +1,43 @@
 import "./Home.css";
 
-import React, { useContext, useEffect, useState } from "react";
-import { CartContext } from "../context/CartContext";
 
-// Search Context import
+
+
+
+
+
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { CartContext } from "../context/CartContext";
 import { SearchContext } from "../context/SearchContext";
 
-// Firebase imports
 import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
 
-export default function Home() {
+import addSound from "../assets/add-to-cart.mp3";
+
+
+
+import { Link, useNavigate } from "react-router-dom";
+
+
+export default function Home({ cartIconRef }) {
   const { addToCart } = useContext(CartContext);
-
-  // Search context
   const { searchTerm } = useContext(SearchContext);
+const navigate = useNavigate();
 
-  // Firebase state
   const [products, setProducts] = useState([]);
 
-  // Load products once
+  // ⭐ Make a ref array
+  const imgRefs = useRef({});
+
+
+const playAddSound = () => {
+  const audio = new Audio(addSound);
+  audio.volume = 0.6;  // smooth volume
+  audio.play();
+};
+
+
   useEffect(() => {
     async function loadProducts() {
       try {
@@ -33,35 +51,103 @@ export default function Home() {
         console.error("Firebase Error:", error);
       }
     }
-
     loadProducts();
   }, []);
 
-  // FILTER PRODUCTS USING SEARCH TERM
   const filteredProducts = products.filter((p) =>
     p.title.toLowerCase().includes(searchTerm)
   );
+
+  // ⭐ Fly animation function
+  const flyToCart = (imgElement) => {
+    if (!imgElement || !cartIconRef?.current) return;
+
+    const imgRect = imgElement.getBoundingClientRect();
+    const cartRect = cartIconRef.current.getBoundingClientRect();
+
+    const flyingImg = imgElement.cloneNode(true);
+    flyingImg.style.position = "fixed";
+    flyingImg.style.top = imgRect.top + "px";
+    flyingImg.style.left = imgRect.left + "px";
+    flyingImg.style.width = imgRect.width + "px";
+    flyingImg.style.height = imgRect.height + "px";
+    flyingImg.style.transition = "all 0.7s ease";
+    flyingImg.style.zIndex = "9999";
+    document.body.appendChild(flyingImg);
+
+    setTimeout(() => {
+      flyingImg.style.top = cartRect.top + "px";
+      flyingImg.style.left = cartRect.left + "px";
+      flyingImg.style.width = "20px";
+      flyingImg.style.height = "20px";
+      flyingImg.style.opacity = "0.2";
+    }, 50);
+
+    setTimeout(() => flyingImg.remove(), 800);
+  };
 
   return (
     <div>
       <h2 style={{ marginLeft: 20 }}>Products</h2>
 
-      {/* PRODUCT GRID */}
       <div className="product-grid">
         {filteredProducts.length === 0 ? (
-          <p style={{ marginLeft: 20, fontSize: 18 }}>No products found...</p>
+          <p style={{ marginLeft: 20 }}>No products found...</p>
         ) : (
           filteredProducts.map((p) => (
             <div className="product-card" key={p.id}>
-              <img src={p.image} alt={p.title} className="product-img" />
+              <Link to={`/product/${p.id}`} className="product-link">
+                <img
+                  ref={(el) => (imgRefs.current[p.id] = el)}
+                  src={p.image}
+                  alt={p.title}
+                  className="product-img"
+                />
+                <h3>{p.title}</h3>
+   <div className="price-row">
+  <span className="old-price">₹{p.price}</span>
+  <span className="new-price">₹{p.salePrice}</span>
+  <span className="discount">
+    {Math.round(((p.price - p.salePrice) / p.price) * 100)}% OFF
+  </span>
+</div>
 
-              <h3 className="product-title">{p.title}</h3>
 
-              <p className="product-price">₹{p.price}</p>
+              </Link>
 
-              <button className="add-cart-btn" onClick={() => addToCart(p)}>
-                Add to Cart
-              </button>
+        <div className="card-buttons">
+  <button
+    className="add-cart-btn"
+    onClick={() => {
+      flyToCart(imgRefs.current[p.id]);
+      playAddSound();
+     addToCart({
+  ...p,
+  price: p.salePrice,   // 🔥 Correct selling price
+  qty: 1
+ });
+    }}
+  >
+    Add to Cart
+  </button>
+
+  <button
+    className="buy-now-btn"
+    onClick={() => {
+        addToCart({
+        ...p,
+        price: p.salePrice,
+        qty: 1
+      });
+      navigate("/checkout");
+  playAddSound();
+    }}
+  >
+    Buy Now
+  </button>
+</div>
+
+
             </div>
           ))
         )}

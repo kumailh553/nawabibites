@@ -2,8 +2,9 @@
   "name": "my-ecommerce",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://kumailh553.github.io/nawabibites",
+  "homepage": "https://nawabibites.in",
   "dependencies": {
+    "@react-google-maps/api": "^2.20.7",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",

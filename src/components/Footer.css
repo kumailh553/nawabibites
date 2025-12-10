@@ -56,9 +56,15 @@
   padding-top: 15px;
   font-size: 14px;
 }
+.footer-section2{
+margin-left:180px;
 
+}
 
+.footer-section3{
+margin-left:140px;
 
+}
 
 
 
@@ -82,12 +88,21 @@
 
   .footer-text,
   .footer-links a {
-    font-size: 14px;
+    font-size: 12px;
   }
 
   .footer-container {
     gap: 25px;
   }
+
+.footer-section3{
+margin-left:160px;
+margin-top:-225px;
+}
+.footer-section2{
+margin-left:2px;
+
+}
 }
 
 /* EXTRA SMALL SCREENS */

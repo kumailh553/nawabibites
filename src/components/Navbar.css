@@ -11,7 +11,7 @@
 .nav-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 14px 20px;
+  padding: 10px 15px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -75,6 +75,125 @@
   cursor: pointer;
 }
 
+.cart-wrapper {
+  position: relative;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  background: red;
+  color: white;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-weight: bold;
+  animation: pop 0.4s ease;
+}
+
+/* Pop animation */
+@keyframes pop {
+  0% { transform: scale(0); }
+  60% { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+
+.pop-animate {
+  animation: pop 0.4s ease !important;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.username {
+  font-weight: 600;
+  color: #333;
+}
+
+.logout-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background: #dc2626;
+}
+
+.login-btn {
+  font-weight: 600;
+}
+
+
+/* Profile Username */
+.profile-area {
+  position: relative;
+  cursor: pointer;
+}
+
+.username {
+  font-weight: 600;
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: #f1f1f1;
+}
+
+.username:hover {
+  background: #e2e2e2;
+}
+
+/* Dropdown */
+.profile-dropdown {
+  position: absolute;
+  top: 35px;
+  right: 0;
+  background: white;
+  padding: 10px;
+  width: 150px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: fadeIn 0.2s ease;
+  z-index: 999;
+}
+
+.profile-dropdown a,
+.profile-dropdown button {
+  text-align: left;
+  font-size: 15px;
+  padding: 8px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.profile-dropdown a:hover,
+.profile-dropdown button:hover {
+  background: #f5f5f5;
+}
+
+.logout-btn {
+  color: #d60000;
+  font-weight: 600;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
 /* ----------- RESPONSIVE ------------ */
 @media (max-width: 768px) {
 
@@ -107,5 +226,47 @@
 
   .icons {
     font-size: 22px;
+ gap: 18px;
   }
 }
+
+
+
+
+
+
+
+/* Logo image styling */
+.logo-img {
+  height: 55px;
+  width: auto;
+  object-fit: contain;
+}
+
+
+
+
+/* Mobile ke liye responsive logo */
+@media (max-width: 600px) {
+  .logo-img {
+    height: 45px;
+  }
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.username {
+  font-weight: 100px;
+font-size:20px;
+  padding: 3px 4px;
+  border-radius: 6px;
+  background: #f1f1f1;
+}
+}
+

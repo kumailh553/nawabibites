@@ -1,0 +1,91 @@
+.orders-page {
+  padding: 20px;
+}
+
+.orders-page h2 {
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+.loading {
+  padding: 20px;
+  font-size: 20px;
+}
+
+.no-orders {
+  font-size: 18px;
+  padding: 20px;
+  color: #555;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.order-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  animation: fadeIn 0.3s ease;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.order-date {
+  font-size: 14px;
+  color: #555;
+}
+
+.order-items {
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding: 12px 0;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 12px 0;
+}
+
+.order-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.item-title {
+  font-weight: 600;
+}
+
+.qty {
+  color: #666;
+  font-size: 14px;
+}
+
+.item-price {
+  font-weight: bold;
+}
+
+.order-footer {
+  margin-top: 10px;
+}
+
+.order-footer h3 {
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

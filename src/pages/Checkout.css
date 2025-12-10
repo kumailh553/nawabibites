@@ -1,0 +1,160 @@
+.checkout-page {
+  padding: 20px;
+}
+
+.checkout-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* ADDRESS BOX */
+.address-box {
+  flex: 2;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.address-box input,
+.address-box textarea {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  font-size: 15px;
+}
+
+.address-box textarea {
+  height: 70px;
+}
+
+/* SUMMARY BOX */
+.summary-box {
+  flex: 1;
+  background: #fafafa;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  height: fit-content;
+}
+
+.summary-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.summary-item img {
+  width: 60px;
+  height: 60px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+}
+
+.summary-total {
+  margin-top: 10px;
+  font-size: 22px;
+}
+
+.place-btn {
+  width: 100%;
+  padding: 12px;
+  background: #0d6efd;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.place-btn:hover {
+  background: #004ecb;
+}
+
+.detect-btn {
+  padding: 10px;
+  background: #4caf50;
+  color: white;
+  border: none;
+  margin-bottom: 10px;
+  width: 100%;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.detect-btn:hover {
+  background: #43a047;
+}
+
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background: white;
+}
+
+
+
+
+/* Dropdown wrapper */
+.address-box select {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1.5px solid #ccc;
+  background: #fff;
+  outline: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+/* Dropdown Focus */
+.address-box select:focus {
+  border-color: #ff8c00;
+  box-shadow: 0 0 8px rgba(255, 140, 0, 0.3);
+}
+
+/* Dropdown Hover */
+.address-box select:hover {
+  border-color: #ff8c00;
+}
+
+/* Option styling */
+.address-box select option {
+  padding: 10px;
+}
+.map-container {
+  margin: 10px 0 20px 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .checkout-container {
+    flex-direction: column;
+  }
+
+  .summary-box {
+    width: 90%;
+  }
+}
