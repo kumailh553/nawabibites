@@ -69,10 +69,10 @@ const dropdownRef = useRef(null);
 
         {/* Navigation Links */}
         <nav className={`nav-links ${menuOpen ? "open" : ""}`}>
-          <Link to="/category/mens">Mens</Link>
-          <Link to="/category/womens">Womens</Link>
-          <Link to="/category/kids">Kids</Link>
-          <Link to="/category/electronics">Electronics</Link>
+         
+          <Link to="/category/womens">Methi Mathri</Link>
+          <Link to="/category/kids">Ajwain Mathri</Link>
+          <Link to="/category/electronics">Classic Masala</Link>
         </nav>
 
         {/* Search Box */}

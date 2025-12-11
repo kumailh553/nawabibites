@@ -60,7 +60,7 @@ Opt-out from marketing emails
 Contact
 
 For privacy-related queries:
-📩 support@nawabibites.com
+📩 kumailh553@mail.com
       </p>
     </div>
   );
