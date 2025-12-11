@@ -1,5 +1,6 @@
 import React from "react";
 import "./Banner.css";
+import Banner1 from "../assets/Banner1.jpg";
 
 export default function Banner() {
 
@@ -16,19 +17,21 @@ export default function Banner() {
       {/* MAIN AUTO SLIDER */}
       <div className="hero-slider">
         <img
-          src="https://i.ibb.co/5gsd5tF9/20251210-155642.jpg"
+          src={Banner1}
           alt="banner"
           className="slide slide1"
         />
 
+
+
         <img
-          src="https://i.ibb.co/5gsd5tF9/20251210-155642.jpg"
+          src={Banner1}
           alt="banner2"
           className="slide slide2"
         />
 
         <img
-          src="https://i.ibb.co/5gsd5tF9/20251210-155642.jpg"
+          src={Banner1}
           alt="banner3"
           className="slide slide3"
         />
