@@ -40,6 +40,17 @@ useEffect(() => {
   }
 }, []);
 
+
+// Redirect if cart is empty
+useEffect(() => {
+  if (cart.length === 0) {
+    navigate("/");
+  }
+}, [cart, navigate]);
+
+
+
+
 // ⭐ Auto-Fill User Address from Firebase
 useEffect(() => {
   async function loadSavedAddress() {
@@ -135,13 +146,17 @@ state: addr.state || "",
       const orderRef = await addDoc(collection(db, "orders"), {
         userId: auth.currentUser.uid,
         email: auth.currentUser.email,
-
+  trackingId: "NB" + Date.now(),   // ⭐ ADDED
         address,
         items: cart,
         subtotal,
         deliveryCharge: delivery,
         total: finalTotal,
         createdAt: Timestamp.now(),
+
+
+trackingId: "NB" + Date.now(),   // ⭐ auto tracking ID
+
       });
 
 

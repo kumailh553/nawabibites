@@ -53,6 +53,38 @@ export default function MyOrders() {
                 </span>
               </div>
 
+
+
+
+        {/* ⭐ TRACKING ID SECTION ⭐ */}
+            <div className="tracking-box">
+              <p>
+                <strong>Tracking ID:</strong>{" "}
+                {order.trackingId ? (
+                  <span style={{ color: "green", fontWeight: "bold" }}>
+                    {order.trackingId}
+                  </span>
+                ) : (
+                  <span style={{ color: "red" }}>Not generated yet</span>
+                )}
+              </p>
+            </div>
+
+
+
+{order.trackingUrl && (
+  <button
+    className="track-btn"
+    onClick={() => window.open(order.trackingUrl, "_blank")}
+  >
+    🚚 Track Order
+  </button>
+)}
+
+
+
+
+
               <div className="order-items">
                 {order.items.map((item, i) => (
                   <div className="order-item" key={i}>

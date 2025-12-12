@@ -79,3 +79,89 @@
   font-size: 16px;
   outline: none;
 }
+
+
+.tracking-box {
+  margin-bottom: 10px;
+}
+
+.tracking-input {
+  padding: 6px;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+
+
+
+
+
+
+
+/* ---------------------------------------------------
+   📱 MOBILE RESPONSIVE DESIGN (Very Important)
+---------------------------------------------------- */
+@media (max-width: 768px) {
+  .order-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+  }
+
+  .admin-order-card {
+    padding: 15px;
+  }
+
+  .admin-item img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .admin-title {
+    font-size: 22px;
+  }
+
+  .admin-search {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-title {
+    font-size: 20px;
+  }
+
+  .admin-order-card {
+    padding: 12px;
+  }
+
+  .order-header h3 {
+    font-size: 16px;
+  }
+
+  .order-date {
+    font-size: 12px;
+  }
+
+  .admin-item p {
+    font-size: 14px;
+  }
+
+  .status-dropdown,
+  .tracking-input,
+  .track-btn {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+

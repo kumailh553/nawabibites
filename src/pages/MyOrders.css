@@ -89,3 +89,85 @@
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+
+
+
+
+
+.track-btn {
+  background: #007bff;
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.tracking-input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* -------------------------------------- */
+/*           ⭐ MOBILE RESPONSIVE          */
+/* -------------------------------------- */
+@media (max-width: 600px) {
+  .orders-page {
+    padding: 12px;
+  }
+
+  .orders-page h2 {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .order-card {
+    padding: 16px;
+  }
+
+  .order-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .order-item {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .order-item img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .item-title {
+    font-size: 14px;
+  }
+
+  .item-price {
+    font-size: 15px;
+  }
+
+  .track-btn {
+    font-size: 14px;
+    padding: 10px;
+  }
+}

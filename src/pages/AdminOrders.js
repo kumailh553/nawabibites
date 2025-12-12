@@ -15,6 +15,37 @@ export default function AdminOrders() {
 
   const statusOptions = ["Pending", "Packed", "Shipped", "Delivered"];
 
+
+
+
+
+
+const updateOrderField = async (orderId, field, value) => {
+  try {
+    await updateDoc(doc(db, "orders", orderId), { [field]: value });
+
+    setOrders((prev) =>
+      prev.map((o) =>
+        o.id === orderId ? { ...o, [field]: value } : o
+      )
+    );
+  } catch (err) {
+    console.error("Tracking update error:", err);
+    alert("Failed to update");
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
   useEffect(() => {
     async function loadOrders() {
       try {
@@ -23,7 +54,7 @@ export default function AdminOrders() {
           id: d.id,
           ...d.data(),
         }));
-        setOrders(list.reverse()); // latest first
+        setOrders(list.reverse());
       } catch (err) {
         console.error("Order fetch error:", err);
       }
@@ -31,14 +62,14 @@ export default function AdminOrders() {
     loadOrders();
   }, []);
 
-  // 🔍 FILTER ORDERS
+  // 🔍 SEARCH
   const filteredOrders = orders.filter((o) =>
     o.address?.name?.toLowerCase().includes(search) ||
     o.address?.phone?.includes(search) ||
     o.id.toLowerCase().includes(search)
   );
 
-  // 🔥 UPDATE ORDER STATUS
+  // 🔥 UPDATE STATUS
   const updateStatus = async (orderId, newStatus) => {
     try {
       await updateDoc(doc(db, "orders", orderId), {
@@ -47,9 +78,7 @@ export default function AdminOrders() {
       });
 
       setOrders((prev) =>
-        prev.map((o) =>
-          o.id === orderId ? { ...o, status: newStatus } : o
-        )
+        prev.map((o) => (o.id === orderId ? { ...o, status: newStatus } : o))
       );
     } catch (err) {
       console.error("Status update error:", err);
@@ -57,11 +86,34 @@ export default function AdminOrders() {
     }
   };
 
+  // ⭐ UPDATE TRACKING ID
+  const updateTrackingId = async (orderId, trackingId) => {
+    try {
+      await updateDoc(doc(db, "orders", orderId), {
+        trackingId,
+        updatedAt: Timestamp.now(),
+      });
+
+      setOrders((prev) =>
+        prev.map((o) =>
+          o.id === orderId ? { ...o, trackingId } : o
+        )
+      );
+
+      alert("Tracking ID updated!");
+    } catch (err) {
+      console.error("Tracking update error:", err);
+      alert("Failed to update Tracking ID");
+    }
+  };
+
+
+
+
   return (
     <div className="admin-orders-page">
       <h2 className="admin-title">📦 All Orders (Admin Panel)</h2>
 
-      {/* 🔍 SEARCH BAR */}
       <input
         type="text"
         placeholder="Search by name, phone, order ID…"
@@ -82,11 +134,41 @@ export default function AdminOrders() {
                 </p>
               </div>
 
+              {/* ⭐ TRACKING ID SECTION ⭐ */}
+              <div className="tracking-box">
+                <p><b>Tracking ID:</b></p>
+                <div style={{ display: "flex", gap: "8px" }}>
+                  <input
+                    type="text"
+                    placeholder="Enter Tracking ID"
+                    defaultValue={order.trackingId || ""}
+                    onBlur={(e) =>
+                      updateTrackingId(order.id, e.target.value)
+                    }
+                    className="tracking-input"
+                  />
+                </div>
+              </div>
+
+
+{/* 🔥 Add Tracking URL */}
+<input
+  type="text"
+  className="tracking-input"
+  placeholder="Tracking URL"
+  value={order.trackingUrl || ""}
+  onChange={(e) =>
+    updateOrderField(order.id, "trackingUrl", e.target.value)
+  }
+/>
+
+
+
               <div className="order-section">
                 <p><b>Name:</b> {order.address?.name}</p>
                 <p><b>Phone:</b> {order.address?.phone}</p>
                 <p>
-                  <b>Address:</b> 
+                  <b>Address:</b>
                   {order.address?.house}, {order.address?.area},{" "}
                   {order.address?.city} - {order.address?.pincode}
                 </p>
@@ -111,7 +193,6 @@ export default function AdminOrders() {
                 <p>Delivery: ₹{order.deliveryCharge}</p>
                 <h3>Total: ₹{order.total}</h3>
 
-                {/* 🔥 STATUS DROPDOWN */}
                 <select
                   className="status-dropdown"
                   value={order.status || "Pending"}

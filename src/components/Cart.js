@@ -1,14 +1,25 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { CartContext } from "../context/CartContext";
 import "./Cart.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 export default function Cart() {
+const navigate = useNavigate();
+
   const { cart, updateQty, removeFromCart } = useContext(CartContext);
 
   const [coupon, setCoupon] = useState("");
   const [discount, setDiscount] = useState(0);
+
+
+useEffect(() => {
+  if (cart.length === 0) {
+    navigate("/");
+  }
+}, [cart, navigate]);
+
 
   // Apply Coupon
   const applyCoupon = () => {
@@ -20,6 +31,11 @@ export default function Cart() {
       alert("Invalid Coupon");
     }
   };
+
+
+
+
+
 
   // Total Price Calculation
   const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
