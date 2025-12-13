@@ -9,6 +9,13 @@ import { collection,addDoc, Timestamp,setDoc, doc, getDoc} from "firebase/firest
 import { useNavigate } from "react-router-dom";
 
 
+
+import emailjs from "@emailjs/browser";
+
+
+
+
+
 export default function Checkout() {
 
 
@@ -18,6 +25,26 @@ export default function Checkout() {
 
   const { cart } = useContext(CartContext);
   const navigate = useNavigate();
+
+
+
+
+const orderItemsHTML = cart.map(item => `
+<tr>
+  <td style="padding: 12px 8px;">
+    <img src="${item.image}" height="60" />
+  </td>
+  <td>
+    <b>${item.title}</b><br/>
+    Qty: ${item.qty}
+  </td>
+  <td><b>₹${item.price * item.qty}</b></td>
+</tr>
+`).join("");
+
+
+
+
 
  
 
@@ -158,6 +185,40 @@ state: addr.state || "",
 trackingId: "NB" + Date.now(),   // ⭐ auto tracking ID
 
       });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://mukaishworkspecialist.com/send-telegram.php
+
+
+fetch("https://mukaishworkspecialist.com/send-telegram.php", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    order_id: orderRef.id,
+    name: address.name,
+    phone: address.phone,
+    total: finalTotal,
+    address: address,
+    items: cart
+  })
+});
+
+
 
 
 
