@@ -5,11 +5,98 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
+import { sendPasswordResetEmail } from "firebase/auth";
+
+
+
+
+
+
+
+
+
+
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+
+
+
+
+
+
+
+
 
 export default function SingleAuth() {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
+
+
+
+
+
+const provider = new GoogleAuthProvider();
+
+
+
+
+const handleForgotPassword = async () => {
+  if (!email) {
+    alert("Please enter your email first");
+    return;
+  }
+
+  try {
+    await sendPasswordResetEmail(auth, email);
+    alert("Password reset link sent to your email 📩 and also check Spam folder");
+  } catch (error) {
+    console.error(error);
+    alert(error.message);
+  }
+};
+
+
+
+
+
+
+
+
+const handleGoogleLogin = async () => {
+  try {
+    const result = await signInWithPopup(auth, provider);
+
+    const user = result.user;
+
+    console.log("Google User:", user);
+
+    alert("Login successful with Google 🎉");
+
+    // redirect after login
+    navigate("/");
+  } catch (error) {
+    console.error(error);
+    alert(error.message);
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   const navigate = useNavigate();
 
@@ -56,6 +143,44 @@ export default function SingleAuth() {
         />
 
         <button onClick={handleAuth}>Continue</button>
+
+
+
+
+
+
+
+<p className="forgot-link" onClick={handleForgotPassword}>
+  Forgot Password?
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<button className="google-btn" onClick={handleGoogleLogin}>
+  <img
+    src="https://developers.google.com/identity/images/g-logo.png"
+    alt="Google"
+    className="google-icon"
+  />
+  <span>Continue with Google</span>
+</button>
+
+
+
+
+
+
+
       </div>
     </div>
   );

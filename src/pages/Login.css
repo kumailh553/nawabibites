@@ -52,6 +52,49 @@
 
 
 
+
+
+.google-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  padding: 14px 16px;
+  margin-top: 16px;
+
+  background: #ffffff;
+  color: #333;
+  font-size: 16px;
+  font-weight: 500;
+
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.google-btn:hover {
+  background: #f7f7f7;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  transform: translateY(-1px);
+}
+
+.google-btn:active {
+  transform: scale(0.98);
+}
+
+.google-icon {
+  width: 22px;
+  height: 22px;
+}
+
+
+
+
 /* ---------------- MOBILE RESPONSIVE ---------------- */
 @media (max-width: 600px) {
 .login-container {
