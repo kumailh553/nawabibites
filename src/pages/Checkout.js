@@ -29,6 +29,47 @@ export default function Checkout() {
 
 
 
+
+
+
+
+const handleCashfreePayment = async () => {
+  const res = await fetch("https://nawabibites.in/api/create_order.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      amount: finalTotal,
+      name: address.name,
+      email: auth.currentUser.email,
+      phone: address.phone,
+    }),
+  });
+
+  const data = await res.json();
+
+  if (!data.payment_session_id) {
+    alert("Payment initiation failed");
+    return;
+  }
+
+  const cashfree = new window.Cashfree({
+    mode: "production",
+  });
+
+  cashfree.checkout({
+    paymentSessionId: data.payment_session_id,
+    redirectTarget: "_self",
+  });
+};
+
+
+
+
+
+
+
+
+
 const orderItemsHTML = cart.map(item => `
 <tr>
   <td style="padding: 12px 8px;">
@@ -374,9 +415,15 @@ TOTAL: ₹${finalTotal}
 
           <h2 className="summary-total">Total: ₹{finalTotal}</h2>
 
-          <button className="place-btn" onClick={placeOrder}>
-            Place Order
-          </button>
+      
+
+<button className="place-btn" onClick={handleCashfreePayment}>
+  Pay Securely
+</button>
+
+
+
+
         </div>
       </div>
     </div>
