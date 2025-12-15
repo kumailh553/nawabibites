@@ -34,7 +34,7 @@ export default function Checkout() {
 
 
 const handleCashfreePayment = async () => {
-  const res = await fetch("https://nawabibites.in/api/create_order.php", {
+  const res = await fetch("https://mukaishworkspecialist.com/create_order.php", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
