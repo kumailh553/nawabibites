@@ -70,9 +70,32 @@ const dropdownRef = useRef(null);
         {/* Navigation Links */}
         <nav className={`nav-links ${menuOpen ? "open" : ""}`}>
          
-          <Link to="/category/womens">Methi Mathri</Link>
-          <Link to="/category/kids">Ajwain Mathri</Link>
-          <Link to="/category/electronics">Classic Masala</Link>
+        
+<a
+  href="https://nawabibites.in/#/product/FQKm1qxbE8evmwtJqoeK"
+  className="category-link"
+>
+  Methi Mathri
+</a>
+
+<a
+  href="https://nawabibites.in/#/product/tAnmcTULE4NeUoNJ3rDQ"
+  className="category-link"
+>
+  Classic Masala
+</a>
+
+<a
+  href="https://nawabibites.in/#/product/rfDA8OfPhwS3ziWuK4ZE"
+  className="category-link"
+>
+  Ajwain Mathri
+</a>
+
+
+
+
+          
         </nav>
 
         {/* Search Box */}

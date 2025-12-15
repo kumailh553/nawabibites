@@ -19,7 +19,7 @@ export default function AdminOrders() {
 
   const statusOptions = ["Pending", "Packed", "Shipped", "Delivered"];
 
-  // 🔥 Fetch orders date-wise
+  
   const fetchOrdersByDate = async (date) => {
     setLoading(true);
 
@@ -153,6 +153,22 @@ export default function AdminOrders() {
                 updateOrderField(order.id, "trackingUrl", e.target.value)
               }
             />
+
+
+
+      <div className="order-section">
+                <p><b>Name:</b> {order.address?.name}</p>
+                <p><b>Phone:</b> {order.address?.phone}</p>
+                <p>
+                  <b>Address:</b>
+                  {order.address?.house}, {order.address?.area},{" "}
+                  {order.address?.city} ,{order.address?.state}- {order.address?.pincode}
+
+                </p>
+              </div>
+
+
+
 
             {/* Items */}
             {order.items?.map((item, i) => (

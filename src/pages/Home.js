@@ -14,6 +14,7 @@ import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
 
 import addSound from "../assets/add-to-cart.mp3";
+import FeaturesSection from "../components/FeaturesSection";
 
 
 
@@ -145,6 +146,11 @@ const playAddSound = () => {
   >
     Buy Now
   </button>
+
+
+
+
+
 </div>
 
 
@@ -152,6 +158,11 @@ const playAddSound = () => {
           ))
         )}
       </div>
+
+   <FeaturesSection />
+
+
     </div>
+
   );
 }

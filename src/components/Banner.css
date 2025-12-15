@@ -191,7 +191,7 @@ font-family:sans serif;
  /* 3 GRID BANNERS — MOBILE ME 3 COLUMNS */
   .grid-banners {
     grid-template-columns: repeat(3, 1fr); /* 3 grids in 1 row */
-    gap: 8px;
+    gap: 2px;
   }
 
   .grid-card img {

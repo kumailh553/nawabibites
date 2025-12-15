@@ -135,7 +135,7 @@ state: addr.state || "",
 
 
   const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-  const delivery = subtotal > 500 ? 0 : 40;
+  const delivery = 0;
   const finalTotal = subtotal + delivery;
 
   const handleChange = (e) => {
