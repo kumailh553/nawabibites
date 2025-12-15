@@ -24,6 +24,11 @@ import ShippingPolicy from "./pages/ShippingPolicy";
 import Contact from "./pages/Contact";
 import AdminOrders from "./pages/AdminOrders";
 
+import PaymentSuccess from "./pages/PaymentSuccess";
+
+
+
+
 
 
 import { ADMIN_EMAIL } from "./utils/adminAuth";
@@ -92,6 +97,10 @@ const AdminRoute = ({ children }) => {
           <Route path="/shipping-policy" element={<ShippingPolicy />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/about" element={<About />} />
+
+<Route path="/payment-success" element={<PaymentSuccess />} />
+
+
           <Route path="/contact" element={<Contact />} />
 
 
