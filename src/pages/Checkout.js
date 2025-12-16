@@ -169,7 +169,20 @@ const handleCashfreePayment = async () => {
   }
 
   try {
-    // 🔹 1. Create Cashfree Order
+    // ✅ 1. SAVE ORDER AS PENDING
+    const orderRef = await addDoc(collection(db, "orders"), {
+      userId: auth.currentUser.uid,
+      email: auth.currentUser.email,
+      address,
+      items: cart,
+      subtotal,
+      deliveryCharge: delivery,
+      total: finalTotal,
+      status: "PENDING",          // 🔥 IMPORTANT
+      createdAt: Timestamp.now(),
+    });
+
+    // ✅ 2. CREATE CASHFREE ORDER
     const res = await fetch(
       "https://mukaishworkspecialist.com/create-order.php",
       {
@@ -180,22 +193,23 @@ const handleCashfreePayment = async () => {
           customer_name: address.name,
           customer_email: auth.currentUser.email,
           customer_phone: address.phone,
+          merchant_order_id: orderRef.id, // 🔥 SAME ID
         }),
       }
     );
 
-  const data = await res.json();
+    const data = await res.json();
 
     if (!data.payment_session_id) {
       alert("Unable to start payment");
       return;
     }
 
+    // ✅ 3. OPEN CASHFREE CHECKOUT
     const cashfree = new window.Cashfree({
-      mode: "production", // sandbox if testing
+      mode: "production",
     });
 
-    // ✅ ONLY THIS — no event listeners
     cashfree.checkout({
       paymentSessionId: data.payment_session_id,
       redirectTarget: "_modal",
@@ -209,53 +223,7 @@ const handleCashfreePayment = async () => {
 
 
 
-const saveOrderAfterPayment = async () => {
-  try {
-    const orderRef = await addDoc(collection(db, "orders"), {
-      userId: auth.currentUser.uid,
-      email: auth.currentUser.email,
-      address,
-      items: cart,
-      subtotal,
-      deliveryCharge: delivery,
-      total: finalTotal,
-      status: "Paid",
-      trackingId: "NB" + Date.now(),
-      createdAt: Timestamp.now(),
-    });
 
-    // 🔥 SEND ORDER TO WHATSAPP
-    const message = `
-New Order Received 📦
-
-Order ID: ${orderRef.id}
-
-Name: ${address.name}
-Phone: ${address.phone}
-Address: ${address.house}, ${address.area}
-${address.city} - ${address.pincode}
-
-Items:
-${cart.map(
-  (item) => `${item.title} x ${item.qty} = ₹${item.qty * item.price}`
-).join("\n")}
-
-Total: ₹${finalTotal}
-`;
-
-    const yourNumber = "918416890304";
-    window.open(
-      `https://wa.me/${yourNumber}?text=${encodeURIComponent(message)}`
-    );
-
-    alert("Payment Successful 🎉 Order Placed!");
-    navigate("/orders");
-
-  } catch (err) {
-    console.error("Order Save Error:", err);
-    alert("Order save failed");
-  }
-};
 
   return (
     <div className="checkout-page">
