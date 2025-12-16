@@ -184,30 +184,30 @@ const handleCashfreePayment = async () => {
       }
     );
 
-    const data = await res.json();
+  const data = await res.json();
 
     if (!data.payment_session_id) {
       alert("Unable to start payment");
       return;
     }
 
-    // 🔹 2. Open Cashfree Checkout
     const cashfree = new window.Cashfree({
-      mode: "production", // sandbox for testing
+      mode: "production", // sandbox if testing
     });
 
+    // ✅ ONLY THIS — no event listeners
     cashfree.checkout({
       paymentSessionId: data.payment_session_id,
       redirectTarget: "_modal",
     });
 
-
-
   } catch (err) {
-    console.error("Payment Error:", err);
-    alert("Payment error");
+    console.error(err);
+    alert("Payment initialization failed");
   }
 };
+
+
 
 const saveOrderAfterPayment = async () => {
   try {
