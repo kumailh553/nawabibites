@@ -201,14 +201,7 @@ const handleCashfreePayment = async () => {
       redirectTarget: "_modal",
     });
 
-    // 🔹 3. Payment Events
-    cashfree.on("payment.success", async () => {
-      await saveOrderAfterPayment();
-    });
 
-    cashfree.on("payment.failed", () => {
-      alert("Payment Failed ❌");
-    });
 
   } catch (err) {
     console.error("Payment Error:", err);

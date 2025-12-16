@@ -1,47 +1,32 @@
-import React, { useEffect, useState } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
-import { db } from "../firebase";
-import { doc, updateDoc, serverTimestamp } from "firebase/firestore";
+import { useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { db, auth } from "../firebase";
+import { addDoc, collection, Timestamp } from "firebase/firestore";
 
 export default function PaymentSuccess() {
-  const [params] = useSearchParams();
   const navigate = useNavigate();
+  const [params] = useSearchParams();
   const orderId = params.get("order_id");
 
-  const [status, setStatus] = useState("Verifying payment...");
-
   useEffect(() => {
-    if (!orderId) return;
-
-    fetch(`https://mukaishworkspecialist.com/verify_payment.php?order_id=${orderId}`)
-      .then(res => res.json())
-      .then(async (data) => {
-        if (data.order_status === "PAID") {
-          // ✅ Firestore update
-          await updateDoc(doc(db, "orders", orderId), {
-            paymentStatus: "PAID",
-            paidAt: serverTimestamp(),
-          });
-
-          setStatus("✅ Payment Successful!");
-        } else {
-          setStatus("❌ Payment not completed");
-        }
-      })
-      .catch(() => {
-        setStatus("❌ Verification failed");
+    async function saveOrder() {
+      await addDoc(collection(db, "orders"), {
+        userId: auth.currentUser.uid,
+        cashfreeOrderId: orderId,
+        status: "Paid",
+        createdAt: Timestamp.now(),
       });
-  }, [orderId]);
+
+      navigate("/orders");
+    }
+
+    saveOrder();
+  }, []);
 
   return (
-    <div style={{ padding: 40, textAlign: "center" }}>
-      <h2>{status}</h2>
-
-      {status.includes("Successful") && (
-        <button onClick={() => navigate("/my-orders")}>
-          View My Orders
-        </button>
-      )}
+    <div style={{ padding: 30, textAlign: "center" }}>
+      <h2>Payment Successful 🎉</h2>
+      <p>Your order has been placed successfully</p>
     </div>
   );
 }
