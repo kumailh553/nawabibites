@@ -195,9 +195,11 @@ state: addr.state || "",
         return;
       }
 
-    const orderId = "NB_" + Date.now();
+  const cashfreeOrderId = data.order_id;
 
-await setDoc(doc(db, "orders", orderId), {
+// 2️⃣ SAME ID se Firestore order banao
+await setDoc(doc(db, "orders", cashfreeOrderId), {
+  orderId: cashfreeOrderId,
   userId: auth.currentUser.uid,
   email: auth.currentUser.email,
   address,
@@ -205,9 +207,10 @@ await setDoc(doc(db, "orders", orderId), {
   subtotal,
   deliveryCharge: delivery,
   total: finalTotal,
-  status: "PENDING",
+  status: "PENDING",   // 👈 IMPORTANT
   createdAt: Timestamp.now(),
 });
+
 
       // 3️⃣ Open Cashfree Checkout
       const cashfree = new window.Cashfree({
