@@ -195,21 +195,19 @@ state: addr.state || "",
         return;
       }
 
-      const cashfreeOrderId = data.order_id;
+    const orderId = "NB_" + Date.now();
 
-      // 2️⃣ Save Order in Firestore (PENDING)
-      await setDoc(doc(db, "orders", cashfreeOrderId), {
-        orderId: cashfreeOrderId,
-        userId: auth.currentUser.uid,
-        email: auth.currentUser.email,
-        address,
-        items: cart,
-        subtotal,
-        deliveryCharge: delivery,
-        total: finalTotal,
-        status: "PENDING",
-        createdAt: Timestamp.now(),
-      });
+await setDoc(doc(db, "orders", orderId), {
+  userId: auth.currentUser.uid,
+  email: auth.currentUser.email,
+  address,
+  items: cart,
+  subtotal,
+  deliveryCharge: delivery,
+  total: finalTotal,
+  status: "PENDING",
+  createdAt: Timestamp.now(),
+});
 
       // 3️⃣ Open Cashfree Checkout
       const cashfree = new window.Cashfree({
