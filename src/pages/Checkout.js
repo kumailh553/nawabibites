@@ -143,86 +143,90 @@ state: addr.state || "",
 };
 
 
+  // 🔹 Calculations
+  const subtotal = cart.reduce(
+    (sum, item) => sum + item.price * item.qty,
+    0
+  );
+  const delivery = 0;
+  const finalTotal = subtotal + delivery;
 
+  const handleChange = (e) => {
+    setAddress({ ...address, [e.target.name]: e.target.value });
+  };
 
-
- const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-const delivery = 0;
-const finalTotal = subtotal + delivery;
-
-const handleChange = (e) => {
-  setAddress({ ...address, [e.target.name]: e.target.value });
-};
-
-const handleCashfreePayment = async () => {
-  if (
-    !address.name ||
-    !address.phone ||
-    !address.pincode ||
-    !address.city ||
-    !address.state ||
-    !address.house ||
-    !address.area
-  ) {
-    alert("Please fill all address details!");
-    return;
-  }
-
-  try {
-    // ✅ 1. SAVE ORDER AS PENDING
-    const orderRef = await addDoc(collection(db, "orders"), {
-      userId: auth.currentUser.uid,
-      email: auth.currentUser.email,
-      address,
-      items: cart,
-      subtotal,
-      deliveryCharge: delivery,
-      total: finalTotal,
-      status: "PENDING",          // 🔥 IMPORTANT
-      createdAt: Timestamp.now(),
-    });
-
-    // ✅ 2. CREATE CASHFREE ORDER
-    const res = await fetch(
-      "https://mukaishworkspecialist.com/create-order.php",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          order_amount: Number(finalTotal),
-          customer_name: address.name,
-          customer_email: auth.currentUser.email,
-          customer_phone: address.phone,
-          merchant_order_id: orderRef.id, // 🔥 SAME ID
-        }),
-      }
-    );
-
-    const data = await res.json();
-
-    if (!data.payment_session_id) {
-      alert("Unable to start payment");
+  // ==========================
+  // 🔥 CASHFREE PAYMENT
+  // ==========================
+  const handleCashfreePayment = async () => {
+    if (
+      !address.name ||
+      !address.phone ||
+      !address.pincode ||
+      !address.city ||
+      !address.state ||
+      !address.house ||
+      !address.area
+    ) {
+      alert("Please fill all address details");
       return;
     }
 
-    // ✅ 3. OPEN CASHFREE CHECKOUT
-    const cashfree = new window.Cashfree({
-      mode: "production",
-    });
+    try {
+      // 1️⃣ Create Cashfree Order (Backend)
+      const res = await fetch(
+        "https://mukaishworkspecialist.com/create-order.php",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            order_amount: Number(finalTotal),
+            customer_name: address.name,
+            customer_email: auth.currentUser.email,
+            customer_phone: address.phone,
+          }),
+        }
+      );
 
-    cashfree.checkout({
-      paymentSessionId: data.payment_session_id,
-      redirectTarget: "_modal",
-    });
+      const data = await res.json();
 
-  } catch (err) {
-    console.error(err);
-    alert("Payment initialization failed");
-  }
-};
+      if (!data.payment_session_id || !data.order_id) {
+        alert("Unable to start payment");
+        return;
+      }
 
+      const cashfreeOrderId = data.order_id;
 
+      // 2️⃣ Save Order in Firestore (PENDING)
+      await setDoc(doc(db, "orders", cashfreeOrderId), {
+        orderId: cashfreeOrderId,
+        userId: auth.currentUser.uid,
+        email: auth.currentUser.email,
+        address,
+        items: cart,
+        subtotal,
+        deliveryCharge: delivery,
+        total: finalTotal,
+        status: "PENDING",
+        createdAt: Timestamp.now(),
+      });
 
+      // 3️⃣ Open Cashfree Checkout
+      const cashfree = new window.Cashfree({
+        mode: "production", // sandbox if testing
+      });
+
+      cashfree.checkout({
+        paymentSessionId: data.payment_session_id,
+        redirectTarget: "_modal",
+      });
+    } catch (err) {
+      console.error(err);
+      alert("Payment initialization failed");
+    }
+  };
+
+ 
 
 
   return (

@@ -17,7 +17,11 @@ export default function AdminOrders() {
   const [selectedDate, setSelectedDate] = useState("");
   const [loading, setLoading] = useState(true);
 
-  const statusOptions = ["Pending", "Packed", "Shipped", "Delivered"];
+
+
+
+const [activeStatus, setActiveStatus] = useState("PAID");
+
 
   
   const fetchOrdersByDate = async (date) => {
@@ -59,6 +63,21 @@ export default function AdminOrders() {
     o.id.toLowerCase().includes(search)
   );
 
+
+
+const statusFilteredOrders = filteredOrders.filter(
+  (o) => (o.status || "PENDING") === activeStatus
+);
+
+
+const countByStatus = (status) =>
+  orders.filter(o => (o.status || "PENDING") === status).length;
+
+
+
+
+
+
   const totalAmount = filteredOrders.reduce(
     (sum, o) => sum + o.total,
     0
@@ -96,6 +115,31 @@ export default function AdminOrders() {
     <div className="admin-orders-page">
       <h2 className="admin-title">📦 Admin Orders</h2>
 
+
+<div className="status-tabs">
+  <button
+    className={activeStatus === "PAID" ? "active" : ""}
+    onClick={() => setActiveStatus("PAID")}
+  >
+    🟢 Paid ({countByStatus("PAID")})
+  </button>
+
+  <button
+    className={activeStatus === "PENDING" ? "active" : ""}
+    onClick={() => setActiveStatus("PENDING")}
+  >
+    🟡 Pending ({countByStatus("PENDING")})
+  </button>
+
+  <button
+    className={activeStatus === "FAILED" ? "active" : ""}
+    onClick={() => setActiveStatus("FAILED")}
+  >
+    🔴 Failed ({countByStatus("FAILED")})
+  </button>
+</div>
+
+
       {/* 📅 DATE FILTER */}
       <div className="date-filter">
         <input
@@ -128,7 +172,8 @@ export default function AdminOrders() {
       )}
 
       <div className="order-grid">
-        {filteredOrders.map((order) => (
+       {statusFilteredOrders.map((order) => (
+
           <div className="admin-order-card" key={order.id}>
             <h3>Order #{order.id}</h3>
             <p>{order.createdAt?.toDate().toLocaleString()}</p>
@@ -170,7 +215,7 @@ export default function AdminOrders() {
 
 
 
-            {/* Items */}
+             {/* Items */}
             {order.items?.map((item, i) => (
               <div className="admin-item" key={i}>
                 <img src={item.image} alt="" />
@@ -182,18 +227,7 @@ export default function AdminOrders() {
               </div>
             ))}
 
-            {/* Status */}
-            <select
-              className="status-dropdown"
-              value={order.status || "Pending"}
-              onChange={(e) =>
-                updateStatus(order.id, e.target.value)
-              }
-            >
-              {statusOptions.map((s) => (
-                <option key={s}>{s}</option>
-              ))}
-            </select>
+        
           </div>
         ))}
       </div>
