@@ -56,7 +56,7 @@ useEffect(() => {
             {cart.map((item) => (
               <div className="cart-card fade-in" key={item.id}>
                 
-                <img src={item.image} alt={item.title} className="cart-img" />
+                <img src={item.images?.[0] || item.image} alt={item.title} className="cart-img" />
 
                 <div className="cart-info">
                   <h3>{item.title}</h3>

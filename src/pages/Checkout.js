@@ -311,7 +311,7 @@ await setDoc(doc(db, "orders", cashfreeOrderId), {
           <div className="summary-list">
             {cart.map((item) => (
               <div className="summary-item" key={item.id}>
-                <img src={item.image} alt="" />
+                <img src={item.images?.[0] || item.image} alt="" />
                 <div>
                   <p>{item.title}</p>
                   <p>Qty: {item.qty}</p>
