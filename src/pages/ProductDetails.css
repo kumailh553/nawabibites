@@ -77,9 +77,9 @@ margin-top: 10px;
 }
 
 .new-price1 {
-  color: #e63946;
+  color: #000000;
   font-size: 18px;
-  font-weight: bold;
+  
 }
 
 .discount1 {
@@ -89,6 +89,32 @@ margin-top: 10px;
   background: #e6ffe6;
   padding: 2px 6px;
   border-radius: 4px;
+}
+
+
+.thumb-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  justify-content: center;
+}
+
+.thumb {
+  width: 65px;
+  height: 65px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: 0.2s;
+}
+
+.thumb:hover {
+  transform: scale(1.05);
+}
+
+.thumb.active {
+  border-color: #000;
 }
 
 

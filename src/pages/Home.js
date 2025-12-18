@@ -100,7 +100,7 @@ const playAddSound = () => {
               <Link to={`/product/${p.id}`} className="product-link">
                 <img
                   ref={(el) => (imgRefs.current[p.id] = el)}
-                  src={p.image}
+                  src={p.images?.[0] || p.image}
                   alt={p.title}
                   className="product-img"
                 />

@@ -13,14 +13,21 @@ export default function ProductDetail() {
   const { addToCart } = useContext(CartContext);   // ⭐ Cart context
 
   const [product, setProduct] = useState(null);
+  const [activeImage, setActiveImage] = useState("");
 
   useEffect(() => {
     async function loadProduct() {
       const ref = doc(db, "products", id);
       const snap = await getDoc(ref);
 
-      if (snap.exists()) {
-        setProduct({ id: snap.id, ...snap.data(), qty: 1 }); // ⭐ qty included
+         if (snap.exists()) {
+        const data = snap.data();
+        setProduct({
+          id: snap.id,
+          ...data,
+          qty: 1
+        });
+        setActiveImage(data.images?.[0]); // ⭐ default image
       }
     }
     loadProduct();
@@ -43,9 +50,28 @@ export default function ProductDetail() {
   return (
     <div className="detail-container">
 
+      {/* ⭐ LEFT – IMAGE GALLERY */}
       <div className="left-section">
-        <img src={product.image} alt={product.title} className="detail-image" />
+        <img
+          src={activeImage}
+          alt={product.title}
+          className="detail-image"
+        />
+
+        {/* THUMBNAILS */}
+        <div className="thumb-row">
+          {product.images?.map((img, i) => (
+            <img
+              key={i}
+              src={img}
+              alt=""
+              className={`thumb ${activeImage === img ? "active" : ""}`}
+              onClick={() => setActiveImage(img)}
+            />
+          ))}
+        </div>
       </div>
+
 
       <div className="right-section">
         <h2 className="detail-title">{product.title}</h2>
