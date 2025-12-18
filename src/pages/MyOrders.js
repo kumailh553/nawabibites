@@ -65,12 +65,7 @@ export default function MyOrders() {
           ✅ Paid Orders
         </button>
 
-        <button
-          className={activeTab === "ALL" ? "active" : ""}
-          onClick={() => setActiveTab("ALL")}
-        >
-          📦 UN-PAID
-        </button>
+      
       </div>
 
       {filteredOrders.length === 0 ? (

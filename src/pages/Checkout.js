@@ -130,7 +130,7 @@ const detectLocation = () => {
         city: addr.city || addr.town || "",
         pincode: addr.postcode || "",
 state: addr.state || "",
-        area: `${addr.suburb || ""}, ${addr.road || ""}`,
+       
       }));
 
       alert("Location detected successfully!");
@@ -191,7 +191,7 @@ state: addr.state || "",
       const data = await res.json();
 
       if (!data.payment_session_id || !data.order_id) {
-        alert("Unable to start payment");
+        alert("Please Check Phone Number");
         return;
       }
 

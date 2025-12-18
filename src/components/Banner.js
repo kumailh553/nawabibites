@@ -1,14 +1,15 @@
 import React from "react";
 import "./Banner.css";
-import Banner1 from "../assets/Banner1.jpg";
+import Banner1 from "../assets/Banner1.webp";
+
 
 export default function Banner() {
 
   // Custom images for 3 grid banners
   const gridImages = [
-    "https://i.ibb.co/vC7c0JDf/20251130-235429-1.jpg",  // Image 1
-    "https://i.ibb.co/4Zy5SfPC/20251130-235013.jpg",  // Image 2
-    "https://i.ibb.co/xKsJm86K/20251130-235147-1.jpg"   // Image 3
+    "https://i.ibb.co/Y7xDF0Xn/classic.webp",  // Image 1
+    "https://i.ibb.co/Y6pBdWf/20251130-235013.webp",  // Image 2
+    "https://i.ibb.co/SXPthp6Z/20251130-235147.webp"   // Image 3
   ];
 
   return (

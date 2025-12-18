@@ -152,7 +152,7 @@
 }
 
 .final-total {
-  margin: 10px 0;
+  margin: 20px 0;
   font-size: 22px;
   font-weight: bold;
 }
@@ -184,13 +184,19 @@ text-decoration: none;
 
   .cart-img {
     width: 70px;
-    height: 70px;
+    height: 90px;
   }
 
   .checkout-btn {
     font-size: 16px;
   text-decoration: none;
- 
+
+}
+.final-total {
+  margin: 20px 0;
+  font-size: 22px;
+  font-weight: bold;
+
 }
 
   
