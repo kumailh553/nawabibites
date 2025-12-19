@@ -18,10 +18,12 @@ import FeaturesSection from "../components/FeaturesSection";
 
 
 
+
 import { Link, useNavigate } from "react-router-dom";
 
 
 export default function Home({ cartIconRef }) {
+
   const { addToCart } = useContext(CartContext);
   const { searchTerm } = useContext(SearchContext);
 const navigate = useNavigate();
@@ -89,6 +91,7 @@ const playAddSound = () => {
 
   return (
     <div>
+
       <h2 style={{ marginLeft: 20 }}>Products</h2>
 
       <div className="product-grid">
@@ -158,7 +161,7 @@ const playAddSound = () => {
           ))
         )}
       </div>
-
+ 
    <FeaturesSection />
 
 

@@ -25,6 +25,7 @@ import Contact from "./pages/Contact";
 import AdminOrders from "./pages/AdminOrders";
 
 import PaymentSuccess from "./pages/PaymentSuccess";
+import BreakingNews from "./components/BreakingNews";
 
 
 
@@ -65,8 +66,9 @@ const AdminRoute = ({ children }) => {
 
   return (
     <>
+ 
       <Navbar cartIconRef={cartIconRef} />
-
+ <BreakingNews />
       {isHome && <Banner />}
 
       <div style={{ padding: 16 }}>
@@ -127,12 +129,13 @@ const AdminRoute = ({ children }) => {
 
 export default function App() {
   return (
-  
+   
       <CartProvider>
         <SearchProvider>
           <Router>
             <Wrapper />
           </Router>
+
         </SearchProvider>
       </CartProvider>
    

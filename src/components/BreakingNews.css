@@ -1,0 +1,34 @@
+.breaking-bar {
+  width: 100%;
+  height: 42px;
+  overflow: hidden;
+  background: linear-gradient(90deg, #8e0e00, #c31432);
+  color: #fff;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+margin-top:20px
+}
+
+.breaking-track {
+  display: flex;
+  width: 100%;
+  transition: transform 0.7s ease-in-out;
+}
+
+.breaking-item {
+  min-width: 100%;
+  text-align: center;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* 📱 Mobile */
+@media (max-width: 600px) {
+  .breaking-bar {
+    height: 38px;
+  }
+  .breaking-item {
+    font-size: 13px;
+  }
+}

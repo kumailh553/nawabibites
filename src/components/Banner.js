@@ -12,6 +12,7 @@ export default function Banner() {
     "https://i.ibb.co/SXPthp6Z/20251130-235147.webp"   // Image 3
   ];
 
+
   return (
     <div className="banner-wrapper">
 
@@ -39,6 +40,7 @@ export default function Banner() {
       </div>
 
 <div className="banner123">
+
 <h2 >OUR FLAVOURS</h2>
 </div>
 
@@ -54,8 +56,8 @@ export default function Banner() {
 
       {/* TEXT PROMO BANNER */}
       <div className="offer-banner">
-        <h2>Mega Offer Today!</h2>
-        <p>Buy 2 Get Up To 50% Special discount Scratch Card</p>
+        <h2>Christmas Mega Offer Today!</h2>
+        <p>🛒 Buy 3 Get 1 FREE</p>
         <button>Shop Now</button>
       </div>
     </div>
