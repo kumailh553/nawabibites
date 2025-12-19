@@ -68,7 +68,7 @@ const AdminRoute = ({ children }) => {
     <>
  
       <Navbar cartIconRef={cartIconRef} />
- <BreakingNews />
+ {isHome && <BreakingNews />}
       {isHome && <Banner />}
 
       <div style={{ padding: 16 }}>
