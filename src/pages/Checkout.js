@@ -72,12 +72,6 @@ state: "",
   area: "",
 });
 
-// 🔥 If user NOT logged in → redirect to /auth
-useEffect(() => {
-  if (!auth.currentUser) {
-    navigate("/auth");
-  }
-}, []);
 
 
 // Redirect if cart is empty
