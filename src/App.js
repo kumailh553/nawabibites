@@ -76,15 +76,8 @@ const AdminRoute = ({ children }) => {
           <Route path="/" element={<Home cartIconRef={cartIconRef} />} />
           <Route path="/product/:id" element={<ProductDetails />} />
 
-          {/* Protected Checkout */}
-          <Route
-            path="/checkout"
-            element={
-              <ProtectedRoute>
-                <Checkout />
-              </ProtectedRoute>
-            }
-          />
+ <Route path="/checkout" element={<Checkout />} />
+
 
       
 
