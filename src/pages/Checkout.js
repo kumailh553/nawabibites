@@ -73,7 +73,6 @@ state: "",
 });
 
 
-
 // Redirect if cart is empty
 useEffect(() => {
   if (cart.length === 0) {
@@ -176,7 +175,7 @@ state: addr.state || "",
           body: JSON.stringify({
             order_amount: Number(finalTotal),
             customer_name: address.name,
-            customer_email: auth.currentUser.email,
+            customer_email: auth.currentUser?.email || "guest@nawabibites.com",
             customer_phone: address.phone,
           }),
         }
@@ -185,25 +184,13 @@ state: addr.state || "",
       const data = await res.json();
 
       if (!data.payment_session_id || !data.order_id) {
-        alert("Please Check Phone Number");
+        alert("unable to payment");
         return;
       }
 
-  const cashfreeOrderId = data.order_id;
+ const cashfreeOrderId = data.order_id;
 
-// 2️⃣ SAME ID se Firestore order banao
-await setDoc(doc(db, "orders", cashfreeOrderId), {
-  orderId: cashfreeOrderId,
-  userId: auth.currentUser.uid,
-  email: auth.currentUser.email,
-  address,
-  items: cart,
-  subtotal,
-  deliveryCharge: delivery,
-  total: finalTotal,
-  status: "PENDING",   // 👈 IMPORTANT
-  createdAt: Timestamp.now(),
-});
+
 
 
       // 3️⃣ Open Cashfree Checkout
