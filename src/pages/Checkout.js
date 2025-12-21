@@ -213,7 +213,7 @@ await setDoc(doc(db, "orders", cashfreeOrderId), {
 
       cashfree.checkout({
         paymentSessionId: data.payment_session_id,
-        redirectTarget: "_modal",
+        redirectTarget: "_self",
       });
     } catch (err) {
       console.error(err);
