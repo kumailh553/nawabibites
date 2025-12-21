@@ -27,6 +27,8 @@ import AdminOrders from "./pages/AdminOrders";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import BreakingNews from "./components/BreakingNews";
 
+import AutoGuestAuth from "./AutoGuestAuth";
+
 
 
 
@@ -76,7 +78,14 @@ const AdminRoute = ({ children }) => {
           <Route path="/" element={<Home cartIconRef={cartIconRef} />} />
           <Route path="/product/:id" element={<ProductDetails />} />
 
- <Route path="/checkout" element={<Checkout />} />
+ <Route
+  path="/checkout"
+  element={
+    <AutoGuestAuth>
+      <Checkout />
+    </AutoGuestAuth>
+  }
+/>
 
 
       
